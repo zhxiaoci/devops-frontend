@@ -24,7 +24,7 @@ jobs:
       - name: deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
-          branch: gh-pages
+          branch: main
           publish_dir: ./dist
           github_token: ${{ secrets.DEVOPS_FRONTEND }}
           user_name: ${{ secrets.MY_USER_NAME }}
