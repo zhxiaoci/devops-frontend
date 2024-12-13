@@ -27,7 +27,7 @@ jobs:
         with:
           branch: main
           publish_dir: ./dist
-          github_token: ${{ secrets.DEVOPS_FRONTEND }}
+          github_token: ${{ secrets.DEVOPS_FRONTEND1 }}
           user_name: ${{ secrets.USER_NAME }}
           user_email: ${{ secrets.MY_USER_EMAIL }}
           commit_message: 自动部署
