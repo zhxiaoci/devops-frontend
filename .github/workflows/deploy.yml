@@ -28,6 +28,6 @@ jobs:
           branch: main
           publish_dir: ./dist
           github_token: ${{ secrets.DEVOPS_FRONTEND }}
-          user_name: ${{ secrets.MY_USER_NAME }}
+          user_name: ${{ secrets.USER_NAME }}
           user_email: ${{ secrets.MY_USER_EMAIL }}
           commit_message: 自动部署
