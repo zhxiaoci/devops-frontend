@@ -21,7 +21,7 @@ const queryClient = new QueryClient();
 
 function App() {
   
-  console.log('冲突')
+  console.log('冲突解决')
   return (
     <ConfigProvider
       theme={{
