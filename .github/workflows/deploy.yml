@@ -5,7 +5,7 @@ on:
   # push:
   #   branches:
   #     - main
-
+      
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -13,7 +13,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
         with:
-          ref: test
+          ref: main
 
       - name: build
         uses: actions/setup-node@master
@@ -25,7 +25,8 @@ jobs:
       - name: deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
-          branch: test
+          publish_branch: main
           publish_dir: ./dist
           github_token: ${{ secrets.DEVOPS_FRONTEND }}
           commit_message: 自动部署
+

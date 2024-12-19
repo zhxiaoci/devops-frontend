@@ -136,4 +136,19 @@ export const githubService = {
     );
     return response.data;
   },
+
+  dispatch: async (data: any) => {
+    const response = await apiClient.post(
+      `/github/dispatch`,
+      { ...data }
+    );
+    return response.data;
+  },
+
+  crateReleaseAndMerge: async () => {
+    const response = await apiClient.post(
+      `/github/repos/896719180/test/merge`
+    );
+    return response.data;
+  }
 }; 

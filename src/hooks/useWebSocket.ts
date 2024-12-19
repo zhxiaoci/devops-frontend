@@ -37,7 +37,8 @@ export const useWebSocket = (repoId: string | null) => {
     });
 
     socket.current.on('deployment', (data: any) => {
-      setLastMessage({ type: 'deployment', data });
+      // setLastMessage({ type: 'deployment', data });
+      console.log(data)
     });
 
     socket.current.on('pr', (data: any) => {
@@ -48,6 +49,12 @@ export const useWebSocket = (repoId: string | null) => {
       console.log('pending_change_removed', data);
     });
 
+    socket.current.on('deploy_status', (data: any) => {
+      console.log('pending_change_removed', data);
+    });
+
+    
+
     return () => {
       if (socket.current) {
         socket.current.emit('unsubscribe_repo', repoId);
@@ -56,5 +63,5 @@ export const useWebSocket = (repoId: string | null) => {
     };
   }, [repoId]);
 
-  return { lastMessage };
+  return { lastMessage, socket };
 }; 

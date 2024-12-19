@@ -26,11 +26,12 @@ export interface Branch {
 }
 
 export interface Environment {
-  id: string;
+  id: number;
   name: string;
   status: string;
   currentVersion?: string;
   lastDeployTime?: string;
+  repoId: number;
   changes: Change[];
   deployHistory: Array<{
     id: number;

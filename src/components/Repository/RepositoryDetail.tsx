@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
-import { Card, Tabs, Button, Table, Tag, Space, Modal, Form, Input, Select, Badge, message, Avatar, Popconfirm, Tooltip, Switch } from 'antd';
-import { PlusOutlined, BranchesOutlined, DeploymentUnitOutlined, CloseOutlined, InboxOutlined } from '@ant-design/icons';
+import { Card, Tabs, Button, Table, Tag, Space, Modal, Form, Input, Select, Badge, message, Avatar, Popconfirm, Steps, Switch } from 'antd';
+import { PlusOutlined, BranchesOutlined, DeploymentUnitOutlined, CloseOutlined, InboxOutlined, LoadingOutlined } from '@ant-design/icons';
 import { useQuery, useQueryClient } from 'react-query';
 import { githubService } from '../../services/github';
 import { Repository, Environment } from '../../types/repository';
@@ -34,11 +34,16 @@ const RepositoryDetail: React.FC = () => {
   // 获取仓库详情
   const { data: repo } = useQuery<Repository>(
     ['repository', repoName],
-    () => githubService.getRepository(repoId!)
+    () => githubService.getRepository(repoId!),
+    { refetchOnWindowFocus: false }
   );
+  useEffect(() => {
+    githubService.crateReleaseAndMerge()
+
+  }, [repoId!])
 
   // WebSocket 连接
-  const { lastMessage } = useWebSocket(repoId);
+  const { lastMessage, socket } = useWebSocket(repoId);
   
   // 分支查询
   const { data: branches, isLoading: branchesLoading } = useQuery(
@@ -46,6 +51,7 @@ const RepositoryDetail: React.FC = () => {
     () => githubService.getBranches(repoId!),
     {
       enabled: !!repoId,
+      refetchOnWindowFocus: false 
     }
   );
 
@@ -55,14 +61,21 @@ const RepositoryDetail: React.FC = () => {
     () => githubService.getWorkItems(),
     {
       enabled: !!repoId,
+      refetchOnWindowFocus: false 
     }
   );
 
   // 获取组织成员
   const { data: orgMembers } = useQuery(
     'orgMembers',
-    githubService.getOrganizationMembers
+    githubService.getOrganizationMembers,
+    { refetchOnWindowFocus: false  }
   );
+
+  const handleDeploy = async (envId: number, repoId: number) => {
+    await githubService.dispatch({ envId, repoId });
+    // console.log(socket);
+  }
 
   // 部署环境卡片
   const EnvironmentCard: React.FC<{ env: Environment }> = ({ env }) => {
@@ -172,7 +185,27 @@ const RepositoryDetail: React.FC = () => {
               </Button>
             )}
           </Space>
+          <Button type="primary" onClick={() => handleDeploy(env.id, env.repoId)}>部署</Button>
         </div>
+        <Steps
+          direction="vertical"
+          size="small"
+          current={0}
+          items={[
+            { title: 'Finished', description: '部署成功' },
+            {
+              title: 'In Progress',
+              // status: 'process',
+              description: '部署中',
+              // icon: <LoadingOutlined />,
+            },
+            {
+              title: 'Waiting',
+              description: '部署失败',
+              // icon: <CloseOutlined />,
+            },
+          ]}
+        />
         <div className="environment-content">
           {env.changes.length > 0 ? (
             <Table
