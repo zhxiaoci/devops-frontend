@@ -2,9 +2,9 @@ name: Deploy
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
+  # push:
+  #   branches:
+  #     - main
 
 jobs:
   deploy:
@@ -13,7 +13,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
         with:
-          ref: main
+          ref: test
 
       - name: build
         uses: actions/setup-node@master
@@ -25,7 +25,7 @@ jobs:
       - name: deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
-          branch: main
+          branch: test
           publish_dir: ./dist
           github_token: ${{ secrets.DEVOPS_FRONTEND }}
           commit_message: 自动部署
