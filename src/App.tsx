@@ -20,6 +20,7 @@ const { Content } = Layout;
 const queryClient = new QueryClient();
 
 function App() {
+  console.log(1)
   return (
     <ConfigProvider
       theme={{
