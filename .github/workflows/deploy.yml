@@ -7,10 +7,10 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
-        uses: actions/checkout@v2
-        with:
-          ref: main
+     - name: Step1
+       run: echo "这是job1的第一个步骤"
+     - name: Step2 
+       run: echo "这是job1的第二个步骤"
 
   deploy:
     runs-on: ubuntu-latest
