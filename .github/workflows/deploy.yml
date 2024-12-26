@@ -13,7 +13,7 @@ jobs:
       - name: checkout Code
         uses: actions/checkout@v2
         with:
-          ref: main
+          ref: test
 
       - name: build
         uses: actions/setup-node@master
@@ -25,7 +25,7 @@ jobs:
       - name: deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
-          publish_branch: main
+          publish_branch: test
           publish_dir: ./build
           github_token: ${{ secrets.DEVOPS_FRONTEND }}
           commit_message: 自动部署
