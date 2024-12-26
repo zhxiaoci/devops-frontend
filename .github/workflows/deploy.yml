@@ -25,7 +25,7 @@ jobs:
       - name: deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
-          publish_branch: gh-pages
+          branch: gh-pages
           publish_dir: ./build
           github_token: ${{ secrets.DEVOPS_FRONTEND }}
           commit_message: 自动部署
