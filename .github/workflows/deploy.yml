@@ -12,8 +12,7 @@ jobs:
     steps:
       - name: checkout Code
         uses: actions/checkout@v2
-        with:
-          ref: test
+
 
       - name: build
         uses: actions/setup-node@master
@@ -28,5 +27,5 @@ jobs:
           publish_branch: gh-pages
           publish_dir: ./build
           github_token: ${{ secrets.DEVOPS_FRONTEND }}
-          commit_message: 自动部署
+          commit_message: 自动部署devops
 
