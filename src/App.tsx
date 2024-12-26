@@ -43,7 +43,7 @@ function App() {
     >
       <QueryClientProvider client={queryClient}>
         <UserProvider>
-          <Router>
+          <Router basename='/devops-frontend'>
             <Layout className="app-layout">
               <AppHeader />
               <Layout>
