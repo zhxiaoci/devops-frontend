@@ -4,7 +4,7 @@ const WebpackBar = require('webpackbar');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { PurgeCSSPlugin } = require("purgecss-webpack-plugin");
 const  CircularDependencyPlugin = require("circular-dependency-plugin");
-const { publicEncrypt } = require("crypto");
+const { whenDev } = require("@craco/craco");
 
 const PATHS = {
   src: path.join(__dirname, 'src')
@@ -23,15 +23,15 @@ module.exports = {
           }),
           new WebpackBar(),
           // new MiniCssExtractPlugin(),
-          // new PurgeCSSPlugin({
-          //   paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true })
-          // })
+          new PurgeCSSPlugin({
+            paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true })
+          })
         ]
       },
       configure: (webpackConfig) => {  
         webpackConfig.output = {
           ...webpackConfig.output,
-          publicPath: './',
+          publicPath: 'auto',
           filename: 'static/js/[name].js',
           chunkFilename: 'static/js/[name].[contenthash:8].js',
           // devtoolNamespace: 'source-map'

@@ -13,6 +13,7 @@
     "antd": "^5.22.2",
     "axios": "^1.6.7",
     "circular-dependency-plugin": "^5.2.2",
+    "dotenv-cli": "^8.0.0",
     "qiankun": "^2.10.16",
     "react": "^18.2.0",
     "react-beautiful-dnd": "^13.1.1",
@@ -32,6 +33,7 @@
     "@types/node": "^16.18.122",
     "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
+    "cross-env": "^7.0.3",
     "mini-css-extract-plugin": "^2.9.2",
     "purgecss-webpack-plugin": "^7.0.2",
     "react-scripts": "5.0.1",
@@ -42,6 +44,7 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
+    "build:prod": "cross-env GENERATE_SOURCEMAP=false dotenv -e .env.production craco build",
     "test": "craco test",
     "build:analyze": "craco build && source-map-explorer 'build/static/js/*.js'",
     "eject": "react-scripts eject"
