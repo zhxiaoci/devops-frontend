@@ -33,36 +33,37 @@ module.exports = {
           devtoolNamespace: 'source-map'
         };
         webpackConfig.optimization.runtimeChunk = true;
-        // webpackConfig.optimization = {
-        //   ...webpackConfig.optimization,
-        //   splitChunks: {
-        //     minChunks: 2,
-        //     minSize: 50000,
-        //     maxSize: 100000,
-        //     maxAsyncRequests: 10, // 最大异步请求数
-        //     maxInitialRequests: 10, // 页面初始化最大异步请求数
-        //     cacheGroups: {
-        //       antd: {
-        //         name: 'antd',
-        //         test: /[\\/]node_modules[\\/]antd[\\/]/,
-        //         priority: 20,
-        //         reuseExistingChunk: true,
-        //       },
-        //       common: {
-        //         name: 'react',
-        //         test: /[\\/]node_modules[\\/](react|react-dom|react-router|react-router-dom|react-query|react-beautiful-dnd)[\\/]/,
-        //         priority: 20,
-        //         reuseExistingChunk: true,
-        //       },
-        //       vendor: {
-        //         name: 'vendor',
-        //         test: /[\\/]node_modules[\\/]/i,
-        //         priority: 10,
-        //         reuseExistingChunk: true,
-        //       }
-        //     }
-        //   }
-        // }
+        webpackConfig.optimization = {
+          ...webpackConfig.optimization,
+          splitChunks: {
+            chunks: 'all',
+            minChunks: 2,
+            minSize: 50000,
+            maxSize: 100000,
+            maxAsyncRequests: 10, // 最大异步请求数
+            maxInitialRequests: 10, // 页面初始化最大异步请求数
+            cacheGroups: {
+              antd: {
+                name: 'antd',
+                test: /[\\/]node_modules[\\/]antd[\\/]/,
+                priority: 20,
+                reuseExistingChunk: true,
+              },
+              common: {
+                name: 'react',
+                test: /[\\/]node_modules[\\/](react|react-dom|react-router|react-router-dom|react-query|react-beautiful-dnd)[\\/]/,
+                priority: 20,
+                reuseExistingChunk: true,
+              },
+              vendor: {
+                name: 'vendor',
+                test: /[\\/]node_modules[\\/]/i,
+                priority: 10,
+                reuseExistingChunk: true,
+              }
+            }
+          }
+        }
         // 添加或修改 webpack 配置
         return {
           ...webpackConfig,
