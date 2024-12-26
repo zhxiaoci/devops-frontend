@@ -3,7 +3,8 @@ const glob = require("glob");
 const WebpackBar = require('webpackbar');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { PurgeCSSPlugin } = require("purgecss-webpack-plugin");
-const  CircularDependencyPlugin = require("circular-dependency-plugin")
+const  CircularDependencyPlugin = require("circular-dependency-plugin");
+const { publicEncrypt } = require("crypto");
 
 const PATHS = {
   src: path.join(__dirname, 'src')
@@ -30,7 +31,10 @@ module.exports = {
       configure: (webpackConfig) => {  
         webpackConfig.output = {
           ...webpackConfig.output,
-          devtoolNamespace: 'source-map'
+          publicPath: './',
+          filename: 'static/js/[name].js',
+          chunkFilename: 'static/js/[name].[contenthash:8].js',
+          // devtoolNamespace: 'source-map'
         };
         webpackConfig.optimization.runtimeChunk = true;
         webpackConfig.optimization = {
