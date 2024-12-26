@@ -2,13 +2,31 @@ name: Deploy
 
 on:
   workflow_dispatch:
+  # push:
+  #   branches:
+  #     - main
       
 jobs:
-  check:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-     - name: Step1
-       run: echo "这是job1的第一个步骤"
-     - name: Step2 
-       run: echo "这是job1的第二个步骤"
+      - name: checkout Code
+        uses: actions/checkout@v2
+        with:
+          ref: main
+
+      - name: build
+        uses: actions/setup-node@master
+        with:
+          node-version: '18.x'
+      - run: npm install
+      - run: npm run build
+
+      - name: deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          publish_branch: main
+          publish_dir: ./dist
+          github_token: ${{ secrets.DEVOPS_FRONTEND }}
+          commit_message: 自动部署
 

@@ -18,12 +18,12 @@ const Sidebar: React.FC = () => {
   const menuItems = [
     {
       key: 'repositories',
-      label: 'Repositories',
+      label: '仓库',
       icon: <FolderOutlined />,
       children: [
         {
           key: '/',
-          label: 'My Repositories',
+          label: '项目仓库',
           icon: <ProjectOutlined />,
         },
       ],
@@ -45,12 +45,12 @@ const Sidebar: React.FC = () => {
     },
     {
       key: 'team',
-      label: 'Team',
+      label: '团队',
       icon: <TeamOutlined />,
       children: [
         {
           key: '/team/members',
-          label: 'Members',
+          label: '成员管理',
         },
       ],
     },

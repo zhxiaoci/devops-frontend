@@ -42,9 +42,16 @@ export interface Change {
   branchName: string;
   isNewBranch: boolean;
   status: string;
+  repoId: number | string;
   createdAt: string;
   updatedAt: string;
   createdBy: {
+    id: number;
+    login: string;
+    name?: string;
+    avatarUrl?: string;
+  };
+  manager: {
     id: number;
     login: string;
     name?: string;

@@ -6,6 +6,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #f0f2f5;
+  overflow-x: hidden;
+  width: 100vw;
+  margin-right: calc(100% - 100vw);
 }
 
 .app-layout {
@@ -104,7 +107,6 @@ body {
 
 .ant-btn-primary {
   background: #1890ff;
-  border-color: #1890ff;
 }
 
 .ant-avatar-group {
@@ -117,7 +119,7 @@ body {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
-/* Dashboard specific styles */
+
 .dashboard-card {
   height: 100%;
 }
@@ -173,7 +175,6 @@ body {
   padding: 24px;
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
   .dashboard-card {
     margin-bottom: 16px;
@@ -259,7 +260,6 @@ body {
   border-color: #91d5ff;
 }
 
-/* 工作项相关样式 */
 .work-items-board {
   padding: 24px;
 }
@@ -297,4 +297,9 @@ body {
 .work-item-meta {
   color: #666;
   font-size: 12px;
-} 
+}
+
+.useless {
+  width: 100px;
+  height: 100px;
+}

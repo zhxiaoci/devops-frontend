@@ -1,20 +1,10 @@
-import { Octokit } from 'octokit';
 import { Repository } from '../types/repository';
 import { Change, WorkItem, WorkItemStatus } from '../types/workItem';
 import apiClient from './axios';
 
-const octokit = new Octokit({
-  auth: process.env.REACT_APP_GITHUB_TOKEN
-});
-
 export const githubService = {
   getRepositories: async () => {
     const response = await apiClient.get('/github/repos');
-    return response.data;
-  },
-
-  getDirectRepositories: async () => {
-    const response = await octokit.repos.listForAuthenticatedUser();
     return response.data;
   },
 
@@ -51,6 +41,11 @@ export const githubService = {
 
   getWorkItems: async () => {
     const response = await apiClient.get('/github/work-items');
+    return response.data;
+  },
+
+  getChangeList: async (repoId: number | string) => {
+    const response = await apiClient.get(`/github/repos/${repoId}/changes`);
     return response.data;
   },
 
@@ -97,7 +92,7 @@ export const githubService = {
     title?: string;
     description?: string;
     workItemId?: number | null;
-    assigneeId?: number;
+    managerId?: number;
   }) => {
     const response = await apiClient.put(`/github/changes/${changeId}`, data);
     return response.data;
@@ -145,9 +140,9 @@ export const githubService = {
     return response.data;
   },
 
-  crateReleaseAndMerge: async () => {
+  crateReleaseAndMerge: async (envId: number) => {
     const response = await apiClient.post(
-      `/github/repos/896719180/test/merge`
+      `/github/env/${envId}/merge`
     );
     return response.data;
   }

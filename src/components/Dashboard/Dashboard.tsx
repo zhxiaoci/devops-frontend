@@ -5,7 +5,6 @@ import { useGithubRepositories } from '../../hooks/useGithubRepositories';
 import {
   StarOutlined,
   ForkOutlined,
-  IssuesCloseOutlined,
   BranchesOutlined,
   PullRequestOutlined,
 } from '@ant-design/icons';
@@ -72,7 +71,6 @@ const Dashboard: React.FC = () => {
         </Col>
       </Row>
 
-      {/* Repository Overview and Activities */}
       <Row gutter={[16, 16]} style={{ marginTop: '24px' }}>
         <Col xs={24} lg={16}>
           <Card

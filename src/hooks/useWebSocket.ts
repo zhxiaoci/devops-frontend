@@ -45,8 +45,8 @@ export const useWebSocket = (repoId: string | null) => {
       setLastMessage({ type: 'pr', data });
     });
 
-    socket.current.on('pending_change_removed', (data: any) => {
-      console.log('pending_change_removed', data);
+    socket.current.on('workflow_job', (data: any) => {
+      console.log('workflow_job', data);
     });
 
     socket.current.on('deploy_status', (data: any) => {

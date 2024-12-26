@@ -1,5 +1,7 @@
 import { WorkItem, Change } from './workItem';
 
+export type EnvName = 'test' | 'uat' | 'prod';
+
 export interface Repository {
   id: number;
   name: string;
@@ -28,7 +30,8 @@ export interface Branch {
 export interface Environment {
   id: number;
   name: string;
-  status: string;
+  status: number;
+  step: number;
   currentVersion?: string;
   lastDeployTime?: string;
   repoId: number;
